@@ -19,22 +19,22 @@ import java.util.Date;
 public class Employee {
     @Id
     private String id;
-    @NotBlank
+//    @NotBlank
     @NotEmpty
     private String name;
     private String surname;
     @Size(min = 10, max = 50)
     @Email
-    @Pattern(regexp = "[a-zA-z0-9]")
+    //@Pattern(regexp = "[a-zA-z0-9]")
     private String email;
-    private String position;
+    private String job;
     @Min(10)
     @Max(100)
     //@Pattern(regexp = "[0-9]")
     //@DecimalMin()
     //@DecimalMax()
     //@Positive
-    @PositiveOrZero
+    //@PositiveOrZero
 //    @Negative
 //    @NegativeOrZero
     private int age;
