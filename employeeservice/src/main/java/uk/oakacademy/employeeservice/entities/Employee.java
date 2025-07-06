@@ -12,10 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 @Document(collection="employees")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Employee {
     @Id
     private String id;
@@ -43,5 +43,87 @@ public class Employee {
     @CreationTimestamp
     private Date addedDate;
 
+    public Employee() {
+    }
 
+    public Employee(String id, String name, String surname, String email, String job, int age, Date addedDate) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.job = job;
+        this.age = age;
+        this.addedDate = addedDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public @NotEmpty String getName() {
+        return name;
+    }
+
+    public void setName(@NotEmpty String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public @Size(min = 10, max = 50) @Email String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@Size(min = 10, max = 50) @Email String email) {
+        this.email = email;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    @Min(10)
+    @Max(100)
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(@Min(10) @Max(100) int age) {
+        this.age = age;
+    }
+
+    public Date getAddedDate() {
+        return addedDate;
+    }
+
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", job='" + job + '\'' +
+                ", age=" + age +
+                ", addedDate=" + addedDate +
+                '}';
+    }
 }

@@ -10,9 +10,13 @@ import uk.oakacademy.employeeservice.repositories.EmployeeRepository;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class EmployeeServiceImp implements EmployeeService{
     private final EmployeeRepository employeeRepository;
+
+    public EmployeeServiceImp(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
 
     @Override
