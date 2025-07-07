@@ -9,6 +9,7 @@ import uk.oakacademy.employeeservice.entities.Employee;
 import uk.oakacademy.employeeservice.repositories.EmployeeRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 //@RequiredArgsConstructor
@@ -24,12 +25,17 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public List<EmployeeDTO> getAll() {
-        return List.of();
+        List<Employee>employees=employeeRepository.findAll();
+        List<EmployeeDTO>list=employees.stream().map(employee -> modelMapper.map(employee,EmployeeDTO.class))
+                .collect(Collectors.toList());
+        return list;
     }
 
     @Override
-    public EmployeeDTO getId(String id) {
-        return null;
+    public EmployeeDTO getById(String id) {
+        Employee employee= employeeRepository.findById(id).orElseThrow();
+        EmployeeDTO employeeDTO = modelMapper.map(employee, EmployeeDTO.class);
+        return employeeDTO;
     }
 
     @Override
@@ -55,11 +61,25 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public EmployeeDTO delete(String id) {
+        Employee employee= employeeRepository.findById(id).orElseThrow();
         return null;
     }
 
     @Override
     public Page<EmployeeDTO> findPagination(int pagesize, int pageno, String sortField, String sortDirection) {
         return null;
+    }
+
+    @Override
+    public EmployeeDTO update(EmployeeDTO employeeDTO) {
+        Employee employee = employeeRepository.findById(employeeDTO.getId()).orElseThrow(()->new IllegalArgumentException());
+        employee.setName(employeeDTO.getName());
+        employee.setJob(employeeDTO.getJob());
+        employee.setEmail(employeeDTO.getEmail());
+        employee.setAge(employeeDTO.getAge());
+        employee.setSurname(employeeDTO.getSurname());
+        employeeRepository.save(employee);
+        return employeeDTO;
+
     }
 }

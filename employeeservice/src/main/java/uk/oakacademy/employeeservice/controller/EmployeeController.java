@@ -31,5 +31,17 @@ public class EmployeeController {
         return new ResponseEntity<List<EmployeeDTO>>(employeeService.getAll(),HttpStatus.OK);
 
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeDTO>getById(@PathVariable("id")String id){
+        return ResponseEntity.ok(employeeService.getById(id));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeDTO>update(@PathVariable("id")String id,EmployeeDTO employeeDTO){
+        employeeDTO.setId(id);
+        return new ResponseEntity<EmployeeDTO>(employeeService.update(employeeDTO),HttpStatus.NO_CONTENT);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<EmployeeDTO>delete(@PathVariable("id")String id){
+      return new  ResponseEntity<EmployeeDTO>(employeeService.delete(id),HttpStatus.OK);
+    }
 }
