@@ -62,7 +62,9 @@ public class EmployeeServiceImp implements EmployeeService{
     @Override
     public EmployeeDTO delete(String id) {
         Employee employee= employeeRepository.findById(id).orElseThrow();
-        return null;
+        EmployeeDTO employeeDTO = modelMapper.map(employee,EmployeeDTO.class);
+        employeeRepository.deleteById(id);
+        return employeeDTO;
     }
 
     @Override
